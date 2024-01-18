@@ -1834,6 +1834,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1952448861}
   - component: {fileID: 1952448863}
+  - component: {fileID: 1952448865}
+  - component: {fileID: 1952448864}
   - component: {fileID: 1952448862}
   m_Layer: 5
   m_Name: VidasRestantesTexto
@@ -1881,7 +1883,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Vidas restantes: '
+  m_text: 'Vidas restantes: 3'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d3bb68546dabc340a195faf1cc5ab4a, type: 2}
   m_sharedMaterial: {fileID: -2159761645903139816, guid: 1d3bb68546dabc340a195faf1cc5ab4a, type: 2}
@@ -1958,6 +1960,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952448860}
   m_CullTransparentMesh: 1
+--- !u!114 &1952448864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952448860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b035bc5d41cc043baee6c29fd28601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1952448865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952448860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596f05884793db84db167fe27138007a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1956035350
 GameObject:
   m_ObjectHideFlags: 0
