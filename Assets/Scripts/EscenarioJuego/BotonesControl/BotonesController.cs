@@ -96,12 +96,12 @@ public class BotonesController : MonoBehaviour
         imagenMuro.GetComponent<RawImage>().color = blanco;
     }
 
-    void actualizarPaths()
+    /*void actualizarPaths()
     {
         GameObject[] enemigos = GameObject.FindGameObjectsWithTag("Enemigo");
         foreach (GameObject obj in enemigos)
         {
             obj.GetComponent<NavMeshAgent>().ResetPath();
         }
-    }
+    }*/
 }

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VidasController : MonoBehaviour
+public class EnemigoInfo : MonoBehaviour
 {
-    public static int vidas = 3;
     // Start is called before the first frame update
+    //public 
     void Start()
     {
-        //vidas = 3;
+        
     }
 
     // Update is called once per frame
