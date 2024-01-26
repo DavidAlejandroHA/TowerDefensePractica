@@ -16,7 +16,7 @@ public class TorretaLanzarProyectiles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        temporizador = cooldown;
+        temporizador = 0.1f;
     }
 
     // Update is called once per frame
@@ -26,19 +26,24 @@ public class TorretaLanzarProyectiles : MonoBehaviour
         Collider[] listaChoques;
 
         listaChoques = Physics.OverlapSphere(transform.position, radio, mascara);
+
+        // se obtiene el enemigo más cercano a la torreta
         Transform enemigoMasCercano = obtenerPosEnemigoMasCercano(listaChoques);
         if (enemigoMasCercano != null)
         {
+            // temporizador para disparar cada x tiempo
             temporizador -= Time.deltaTime;
             if (temporizador <= 0)
             {
                 temporizador = cooldown;
             }
 
+            // se dispara un proyectil cada vez que se reinicia el temporizador
             if (temporizador == cooldown)
             {
                 dispararProyectil(enemigoMasCercano);
             }
+            // la torreta va a estar siempre apuntando al enemigo para ser más realista
             transform.LookAt(enemigoMasCercano);
         }
     }
@@ -47,6 +52,8 @@ public class TorretaLanzarProyectiles : MonoBehaviour
     {
         Transform enemigoMasCercano = null;
         float menorDistancia = Mathf.Infinity;
+
+        // se comprueba y elige el enemigo con menor distancia
         if (listaChoques.Length > 0)
         {
             foreach (Collider choque in listaChoques)
@@ -58,8 +65,6 @@ public class TorretaLanzarProyectiles : MonoBehaviour
                     enemigoMasCercano = choque.transform;
                 }
             }
-            // comprobar y elegir el enemigo con menor distancia
-            // ir hacia el
         }
         return enemigoMasCercano; // puede llegar a ser nulo si no hay nada al rededor, hay que
                                   // tenerlo en cuenta
@@ -68,7 +73,17 @@ public class TorretaLanzarProyectiles : MonoBehaviour
     void dispararProyectil(Transform enemigo)
     {
         GameObject proyectil = Instantiate(this.proyectil, transform.position, transform.rotation);
-        proyectil.transform.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, velocidadLanzamiento));
+
+        float velocidadMovimiento = proyectil.GetComponent<Proyectil>().velocidadMovimiento;
+        // obtiene la velocidad que tiene el tipo de proyectil que se va a lanzar
+
+        proyectil.transform.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, 
+            velocidadLanzamiento + velocidadMovimiento));
+        // se lanza dicho proyectil a la velocidad que le corresponde + la velocidad que tiene por defecto
+        // la torreta
+
+        Destroy(proyectil, proyectil.GetComponent<Proyectil>().duracionVidaProyectil);
+        // destruye el proyectil en los segundos que tiene asignado
     }
 
     private void OnDrawGizmos()
