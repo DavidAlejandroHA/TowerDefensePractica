@@ -6,6 +6,7 @@ public class Proyectil : MonoBehaviour
 {
     public float duracionVidaProyectil;
     public float velocidadMovimiento;
+    public float damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +17,15 @@ public class Proyectil : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemigo")
+        {
+            // hacer daño al enemigo
+            // usar el damage
+        }
+        Destroy(this.gameObject);
     }
 }
