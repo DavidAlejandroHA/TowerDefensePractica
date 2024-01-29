@@ -31,6 +31,7 @@ public class Proyectil : MonoBehaviour
         {
             // hacer daño al enemigo
             // usar el damage
+            collision.gameObject.GetComponent<EnemigoIA>().vida -= damage;
         }
         Destroy(this.gameObject);
     }

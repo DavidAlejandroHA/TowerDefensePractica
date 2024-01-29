@@ -11,16 +11,26 @@ public class EnemigoIA : MonoBehaviour
 
     //Vida
     public float vida;
+    float vidaMax;
     // Start is called before the first frame update
     void Start()
     {
         agente = GetComponent<NavMeshAgent>();
         agente.destination = destino.position;
+        vidaMax = vida;
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*TODO: Quitar vida cada vez que le venga un proyectil*/
+        if (vida < 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public float getVidaMax()
+    {
+        return vidaMax;
     }
 }
