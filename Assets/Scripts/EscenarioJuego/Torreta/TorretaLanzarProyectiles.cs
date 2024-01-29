@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class TorretaLanzarProyectiles : MonoBehaviour
 {
+    public int lanzamientos;
     public float cooldown;
     float temporizador;
     public float radio;
     public GameObject proyectil;
-    //public Transform 
+    public GameObject anchorTorreta; 
     int mascara = 1 << 6;
 
     //Proyectiles
@@ -72,18 +73,28 @@ public class TorretaLanzarProyectiles : MonoBehaviour
 
     void dispararProyectil(Transform enemigo)
     {
-        GameObject proyectil = Instantiate(this.proyectil, transform.position, transform.rotation);
+        if(lanzamientos > 0)
+        {
+            GameObject proyectil = Instantiate(this.proyectil, transform.position, transform.rotation);
+            proyectil.SetActive(true);
 
-        float velocidadMovimiento = proyectil.GetComponent<Proyectil>().velocidadMovimiento;
-        // obtiene la velocidad que tiene el tipo de proyectil que se va a lanzar
+            float velocidadMovimiento = proyectil.GetComponent<Proyectil>().velocidadMovimiento;
+            // obtiene la velocidad que tiene el tipo de proyectil que se va a lanzar
 
-        proyectil.transform.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0, 
-            velocidadLanzamiento + velocidadMovimiento));
-        // se lanza dicho proyectil a la velocidad que le corresponde + la velocidad que tiene por defecto
-        // la torreta
+            proyectil.transform.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 0,
+                velocidadLanzamiento + velocidadMovimiento));
+            // se lanza dicho proyectil a la velocidad que le corresponde + la velocidad que tiene por defecto
+            // la torreta
 
-        Destroy(proyectil, proyectil.GetComponent<Proyectil>().duracionVidaProyectil);
-        // destruye el proyectil en los segundos que tiene asignado
+            proyectil.GetComponent<Proyectil>().destruirProyectil();
+            // destruye el proyectil en los segundos que tiene asignado
+            lanzamientos--;
+        } else
+        {
+            Destroy(this.transform.parent.gameObject); // elimina al padre de la torreta que es el que
+                                                       // gestiona el área de colisiones y la torreta en si
+        }
+
     }
 
     private void OnDrawGizmos()

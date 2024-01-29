@@ -5,9 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 
-public class BotonesController : MonoBehaviour
+public class ButtonManager : MonoBehaviour
 {
     bool modoColocarObjeto = false;
+    bool modoDestruirCooldownObjeto = false;
     public NavMeshSurface superficie;
     public GameObject muro;
     public GameObject torreta;
@@ -20,6 +21,23 @@ public class BotonesController : MonoBehaviour
     Color rojo = new Color32(255, 50, 50, 255);
     Color blanco = new Color32(255, 255, 255, 255);
     //GameObject imagenObjetoActual;
+
+    public static ButtonManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        // Si hay alguna instancia, y dicha instancia no soy yo, me la cargo
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            // En caso contrario, yo me asocio como instancia única y global
+            Instance = this;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +61,7 @@ public class BotonesController : MonoBehaviour
         if (key == KeyCode.Alpha1)
         {
             modoColocarObjeto = true;
+            modoDestruirCooldownObjeto = true;
             objetoAColocar = muro;
             imagenTorreta.GetComponent<RawImage>().color = blanco;
             //imagenObjetoActual = imagenMuro;
@@ -51,6 +70,7 @@ public class BotonesController : MonoBehaviour
         if(key == KeyCode.Alpha2)
         {
             modoColocarObjeto = true;
+            modoDestruirCooldownObjeto = false;
             objetoAColocar = torreta;
             imagenTorreta.GetComponent<RawImage>().color = rojo;
             imagenMuro.GetComponent<RawImage>().color = blanco;
@@ -76,16 +96,18 @@ public class BotonesController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && modoColocarObjeto)
         {
-            /* Lanzar un rayo, e instanciar un obstáculo en el punto donde se golpee */
-            /* Hay que reconstruir la superficie, buscar un método que se encargue de ello */
-            Ray rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(rayo, out hit))
+            if (modoDestruirCooldownObjeto)
             {
-                GameObject objetoAColocarCopia =
-                    Instantiate(objetoAColocar, hit.point, objetoAColocar.transform.localRotation);
-                Destroy(objetoAColocarCopia, 2f);
-                //Invoke("actualizarPaths",2f);
+                float tiempoCooldown = 0f;
+                if (objetoAColocar.GetComponent<Muro>() != null)
+                {
+                    tiempoCooldown = objetoAColocar.GetComponent<Muro>().cooldownDestruccion;
+                }
+                Camara.colocarObjeto(objetoAColocar, true, tiempoCooldown);
+            } else
+            {
+                Camara.colocarObjeto(objetoAColocar); // aquí entra en las torretas pero estas se destruyen despues
+                // de disparar n veces
             }
         }
     }

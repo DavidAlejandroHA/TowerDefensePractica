@@ -19,6 +19,12 @@ public class Proyectil : MonoBehaviour
         
     }
 
+    public void destruirProyectil()
+    {
+        Destroy(this, duracionVidaProyectil);
+        // destruye el proyectil en los segundos que tiene asignado
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemigo")
