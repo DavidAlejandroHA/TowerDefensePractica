@@ -12,21 +12,46 @@ public class EnemigoIA : MonoBehaviour
     //Vida
     public float vida;
     float vidaMax;
+
+    //Barra de vida
+    [SerializeField] GameObject barraDeVidaObj;
+    BarradeVida barraDeVida;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
+    {
+        
+    }
+
+    public void Start()
     {
         agente = GetComponent<NavMeshAgent>();
         agente.destination = destino.position;
         vidaMax = vida;
+        //Debug.Log(barraDeVidaObj.GetComponent<BarradeVida>());
+        barraDeVida = barraDeVidaObj.GetComponent<BarradeVida>();
+        barraDeVida.actualizarBarraDeVida(vida, vidaMax); // para asegurar que se actualiza
+        // como es debido al volver a empezar
+    }
+
+    public void takeDamage(float damage)
+    {
+        vida -= damage;
+        barraDeVida.actualizarBarraDeVida(vida, vidaMax);
+        if (vida <= 0)
+        {
+            morir();
+        }
+    }
+
+    void morir()
+    {
+        Destroy(this.gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (vida < 0)
-        {
-            Destroy(this.gameObject);
-        }
+        
     }
 
     public float getVidaMax()

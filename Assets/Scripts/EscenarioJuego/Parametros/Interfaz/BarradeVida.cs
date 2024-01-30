@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class BarrasdeVida : MonoBehaviour
+public class BarradeVida : MonoBehaviour
 {
     public GameObject entidad;
     float vidaMax;
+    [SerializeField] private Slider slider;
+
+    public void actualizarBarraDeVida(float vidaActual, float vidaMax)
+    {
+        slider.value = vidaActual / vidaMax;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
