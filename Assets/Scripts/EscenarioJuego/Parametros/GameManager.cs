@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    public int vidas;
+    public float puntos;
+    public int dinero;
+
     private void Awake()
     {
         // Si hay alguna instancia, y dicha instancia no soy yo, me la cargo
@@ -32,5 +36,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void aniadirPuntos(float puntos)
+    {
+        this.puntos += puntos;
+    }
+
+    public void quitarVida()
+    {
+        vidas--;
     }
 }

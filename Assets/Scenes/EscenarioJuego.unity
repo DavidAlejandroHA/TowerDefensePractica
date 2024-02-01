@@ -1039,6 +1039,7 @@ GameObject:
   - component: {fileID: 679583369}
   - component: {fileID: 679583368}
   - component: {fileID: 679583367}
+  - component: {fileID: 679583370}
   - component: {fileID: 679583366}
   m_Layer: 0
   m_Name: Castillo
@@ -1133,6 +1134,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &679583370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679583365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596f05884793db84db167fe27138007a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &682767592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,6 +1487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destino: {fileID: 679583369}
   vida: 200
+  puntos: 10
   barraDeVidaObj: {fileID: 1994038467}
 --- !u!1 &863143368
 GameObject:
@@ -1693,6 +1707,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194231}
   - component: {fileID: 963194230}
   - component: {fileID: 963194229}
   m_Layer: 0
@@ -1808,6 +1823,21 @@ MonoBehaviour:
   cooldown: 1
   enemigo: {fileID: 776095110}
   radio: 40
+--- !u!114 &963194231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5308429c1234bf49bda8ca95c9eff29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vidas: 3
+  puntos: 0
+  dinero: 0
 --- !u!1 &1050776697
 GameObject:
   m_ObjectHideFlags: 0

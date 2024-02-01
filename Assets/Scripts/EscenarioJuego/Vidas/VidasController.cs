@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class VidasController : MonoBehaviour
 {
-    public static int vidas = 3;
     // Start is called before the first frame update
     void Start()
     {
-        //vidas = 3;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("a");
+        if (collision.gameObject.tag == "Enemigo")
+        {
+            GameManager.Instance.quitarVida();
+            Debug.Log("s");
+            Destroy(collision.gameObject);
+        }
     }
 }

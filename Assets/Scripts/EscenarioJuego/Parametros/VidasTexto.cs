@@ -12,7 +12,7 @@ public class VidasTexto : MonoBehaviour
     {
         objetoTexto = GetComponent<TextMeshProUGUI>();
         textoOriginal = objetoTexto.text;
-        objetoTexto.text = textoOriginal + VidasController.vidas;
+        objetoTexto.text = textoOriginal + GameManager.Instance.vidas;
     }
 
     // Update is called once per frame
