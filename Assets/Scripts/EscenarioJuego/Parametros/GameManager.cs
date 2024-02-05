@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     public void aniadirPuntos(float puntos)
     {
         this.puntos += puntos;
+        UIManager.Instance.actualizarTextoDinero();
     }
 
     public void quitarVida()

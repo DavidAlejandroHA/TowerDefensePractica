@@ -7,8 +7,10 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI objetoTextoVidas;
     [SerializeField] TextMeshProUGUI objetoTextoSegundos;
+    [SerializeField] TextMeshProUGUI objetoTextoDinero;
     string textoVidasOriginal;
     string textoSegundosOriginal;
+    string textoDineroOriginal;
     
     public static UIManager Instance { get; private set; }
 
@@ -34,7 +36,9 @@ public class UIManager : MonoBehaviour
         //objetoTextoVidas = GetComponent<TextMeshProUGUI>();
         textoVidasOriginal = objetoTextoVidas.text;
         textoSegundosOriginal = objetoTextoSegundos.text;
+        textoDineroOriginal = objetoTextoDinero.text;
         actualizarTextoVidas();
+        actualizarTextoDinero();
         //actualizarTextoSegundos();
     }
 
@@ -52,5 +56,10 @@ public class UIManager : MonoBehaviour
     public void actualizarTextoSegundos()
     {
         objetoTextoSegundos.text = textoSegundosOriginal + GameManager.Instance.tiempoRestante.ToString("F1");
+    }
+
+    public void actualizarTextoDinero()
+    {
+        objetoTextoDinero.text = textoDineroOriginal + GameManager.Instance.puntos;
     }
 }
