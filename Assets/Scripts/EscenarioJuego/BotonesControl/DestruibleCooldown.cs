@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Muro : MonoBehaviour
+public class DestruibleCooldown : MonoBehaviour
 {
     public float cooldownDestruccion;
     // Start is called before the first frame update

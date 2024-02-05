@@ -9,7 +9,7 @@ public class TorretaLanzarProyectiles : MonoBehaviour
     float temporizador;
     public float radio;
     public GameObject proyectil;
-    public GameObject anchorTorreta; 
+    public GameObject anchorDisparador; 
     int mascara = 1 << 6;
 
     //Proyectiles

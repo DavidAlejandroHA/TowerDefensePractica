@@ -55,11 +55,11 @@ public class UIManager : MonoBehaviour
 
     public void actualizarTextoSegundos()
     {
-        objetoTextoSegundos.text = textoSegundosOriginal + GameManager.Instance.tiempoRestante.ToString("F1");
+        objetoTextoSegundos.text = textoSegundosOriginal + GameManager.Instance.tiempoRestante.ToString("F1") + "s";
     }
 
     public void actualizarTextoDinero()
     {
-        objetoTextoDinero.text = textoDineroOriginal + GameManager.Instance.puntos;
+        objetoTextoDinero.text = textoDineroOriginal + GameManager.Instance.puntos + "$";
     }
 }

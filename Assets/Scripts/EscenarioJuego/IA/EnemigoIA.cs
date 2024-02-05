@@ -49,6 +49,7 @@ public class EnemigoIA : MonoBehaviour
     void morir()
     {
         GameManager.Instance.aniadirPuntos(puntos);
+        GameManager.Instance.aniadirMuertes();
         Destroy(this.gameObject);
     }
 

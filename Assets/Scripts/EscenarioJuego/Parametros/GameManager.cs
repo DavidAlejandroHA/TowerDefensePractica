@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public float puntos;
     public int dinero;
     public float tiempoRestante;
+    int enemigosMuertos;
     
     bool partidaActiva = true;
 
@@ -32,7 +33,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        // Se empieza con 20 puntos para hacer posible defenderse al jugador
+        aniadirPuntos(10f);
     }
 
     // Update is called once per frame
@@ -51,6 +53,10 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void aniadirMuertes()
+    {
+        enemigosMuertos++;
+    }
     public void aniadirPuntos(float puntos)
     {
         this.puntos += puntos;
@@ -61,7 +67,7 @@ public class GameManager : MonoBehaviour
     {
         vidas--;
         UIManager.Instance.actualizarTextoVidas();
-
+        //puntos += 5;
         //TODO: Finalizar juego al perder todas las vidas
         if (vidas <= 0)
         {
