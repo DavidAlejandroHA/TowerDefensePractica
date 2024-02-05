@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager Instance { get; private set; }
 
     public int vidas;
     public float puntos;
     public int dinero;
+    public float tiempoRestante;
+    
+    bool partidaActiva = true;
 
     private void Awake()
     {
@@ -29,12 +32,22 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (partidaActiva)
+        {
+            tiempoRestante -= Time.deltaTime;
+            
+        }
+
+        if (tiempoRestante <= 0)
+        {
+            terminarPartida();
+        }
         
     }
 
@@ -46,5 +59,23 @@ public class GameManager : MonoBehaviour
     public void quitarVida()
     {
         vidas--;
+        UIManager.Instance.actualizarTextoVidas();
+
+        //TODO: Finalizar juego al perder todas las vidas
+        if (vidas <= 0)
+        {
+            terminarPartida();
+        }
+    }
+
+    public bool getPartidaActiva()
+    {
+        return partidaActiva;
+    }
+
+    public void terminarPartida()
+    {
+        partidaActiva = false;
+        Time.timeScale = 0f;
     }
 }

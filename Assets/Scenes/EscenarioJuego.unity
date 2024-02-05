@@ -1041,6 +1041,7 @@ GameObject:
   - component: {fileID: 679583367}
   - component: {fileID: 679583370}
   - component: {fileID: 679583366}
+  - component: {fileID: 679583371}
   m_Layer: 0
   m_Name: Castillo
   m_TagString: Untagged
@@ -1063,7 +1064,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1146,6 +1147,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596f05884793db84db167fe27138007a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &679583371
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679583365}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &682767592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,6 +1735,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194232}
   - component: {fileID: 963194231}
   - component: {fileID: 963194230}
   - component: {fileID: 963194229}
@@ -1838,6 +1867,21 @@ MonoBehaviour:
   vidas: 3
   puntos: 0
   dinero: 0
+  tiempoRestante: 60
+--- !u!114 &963194232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 072e2230eb0442a4180deba0b678a7b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objetoTextoVidas: {fileID: 1952448862}
+  objetoTextoSegundos: {fileID: 863143370}
 --- !u!1 &1050776697
 GameObject:
   m_ObjectHideFlags: 0
@@ -3003,8 +3047,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1952448861}
   - component: {fileID: 1952448863}
-  - component: {fileID: 1952448865}
-  - component: {fileID: 1952448864}
   - component: {fileID: 1952448862}
   m_Layer: 5
   m_Name: VidasRestantesTexto
@@ -3129,30 +3171,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952448860}
   m_CullTransparentMesh: 1
---- !u!114 &1952448864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1952448860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0b035bc5d41cc043baee6c29fd28601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1952448865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1952448860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 596f05884793db84db167fe27138007a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1956035350
 GameObject:
   m_ObjectHideFlags: 0

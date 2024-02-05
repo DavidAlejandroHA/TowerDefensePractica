@@ -46,18 +46,7 @@ public class ButtonManager : MonoBehaviour
 
 
     void comprobarTecla(KeyCode key)
-    {//KeyCode.Alpha1
-        /*if (Input.GetKeyDown(key) != modoColocarObjeto)
-        { 
-            modoColocarObjeto = true;
-        }
-        else
-        {
-            modoColocarObjeto = !modoColocarObjeto;
-        }*/
-
-        //if (modoColocarObjeto)
-
+    {
         if (key == KeyCode.Alpha1)
         {
             modoColocarObjeto = true;
@@ -79,35 +68,39 @@ public class ButtonManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (GameManager.Instance.getPartidaActiva()) // Si la partida no ha terminado todo sigue
         {
-            comprobarTecla(KeyCode.Alpha1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            comprobarTecla(KeyCode.Alpha2);
-        }
-        //Debug.Log(modoColocarObjeto);
-        if (Input.GetMouseButtonDown(1))
-        {
-            modoColocarObjeto = false;
-            resetImagesColor();
-        }
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                comprobarTecla(KeyCode.Alpha1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                comprobarTecla(KeyCode.Alpha2);
+            }
+            //Debug.Log(modoColocarObjeto);
+            if (Input.GetMouseButtonDown(1))
+            {
+                modoColocarObjeto = false;
+                resetImagesColor();
+            }
 
-        if (Input.GetMouseButtonDown(0) && modoColocarObjeto)
-        {
-            if (modoDestruirCooldownObjeto)
+            if (Input.GetMouseButtonDown(0) && modoColocarObjeto)
             {
-                float tiempoCooldown = 0f;
-                if (objetoAColocar.GetComponent<Muro>() != null)
+                if (modoDestruirCooldownObjeto)
                 {
-                    tiempoCooldown = objetoAColocar.GetComponent<Muro>().cooldownDestruccion;
+                    float tiempoCooldown = 0f;
+                    if (objetoAColocar.GetComponent<Muro>() != null)
+                    {
+                        tiempoCooldown = objetoAColocar.GetComponent<Muro>().cooldownDestruccion;
+                    }
+                    Camara.colocarObjeto(objetoAColocar, true, tiempoCooldown);
                 }
-                Camara.colocarObjeto(objetoAColocar, true, tiempoCooldown);
-            } else
-            {
-                Camara.colocarObjeto(objetoAColocar); // aquí entra en las torretas pero estas se destruyen despues
-                // de disparar n veces
+                else
+                {
+                    Camara.colocarObjeto(objetoAColocar); // aquí entra en las torretas pero estas se destruyen despues
+                                                          // de disparar n veces
+                }
             }
         }
     }
