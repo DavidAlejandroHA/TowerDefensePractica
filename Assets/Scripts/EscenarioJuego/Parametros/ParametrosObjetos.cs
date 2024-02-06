@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestruibleCooldown : MonoBehaviour
+public class ParametrosObjetos : MonoBehaviour
 {
     public float cooldownDestruccion;
+    public float precio;
     // Start is called before the first frame update
     void Start()
     {

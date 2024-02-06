@@ -414,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownDestruccion: -1
+  precio: 10
 --- !u!1 &214560290
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,6 +2233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownDestruccion: -1
+  precio: 20
 --- !u!1 &1050776697
 GameObject:
   m_ObjectHideFlags: 0
@@ -3488,6 +3490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownDestruccion: 4
+  precio: 5
 --- !u!1 &1794821696
 GameObject:
   m_ObjectHideFlags: 0

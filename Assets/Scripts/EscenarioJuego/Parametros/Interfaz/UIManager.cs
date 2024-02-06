@@ -27,19 +27,17 @@ public class UIManager : MonoBehaviour
             // En caso contrario, yo me asocio como instancia única y global
             Instance = this;
         }
+        // Texto de las vidas
+        textoVidasOriginal = objetoTextoVidas.text;
+        textoSegundosOriginal = objetoTextoSegundos.text;
+        textoDineroOriginal = objetoTextoDinero.text;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        // Texto de las vidas
-        //objetoTextoVidas = GetComponent<TextMeshProUGUI>();
-        textoVidasOriginal = objetoTextoVidas.text;
-        textoSegundosOriginal = objetoTextoSegundos.text;
-        textoDineroOriginal = objetoTextoDinero.text;
         actualizarTextoVidas();
         actualizarTextoDinero();
-        //actualizarTextoSegundos();
     }
 
     // Update is called once per frame
@@ -60,6 +58,7 @@ public class UIManager : MonoBehaviour
 
     public void actualizarTextoDinero()
     {
+        //Debug.Log(textoDineroOriginal);
         objetoTextoDinero.text = textoDineroOriginal + GameManager.Instance.puntos + "$";
     }
 }

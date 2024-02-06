@@ -28,7 +28,6 @@ public class Camara : MonoBehaviour
         {
             GameObject objetoAColocarCopia =
                 Instantiate(obj, hit.point, obj.transform.localRotation);
-            Debug.Log("OBJ COLOCADO" + objetoAColocarCopia);
             objetoAColocarCopia.SetActive(true);
             if (destruir)
             {

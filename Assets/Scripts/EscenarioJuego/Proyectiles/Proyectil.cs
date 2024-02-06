@@ -21,7 +21,7 @@ public class Proyectil : MonoBehaviour
 
     public void destruirProyectil()
     {
-        Destroy(this, duracionVidaProyectil);
+        Destroy(this.gameObject, duracionVidaProyectil);
         // destruye el proyectil en los segundos que tiene asignado
     }
 
@@ -29,8 +29,6 @@ public class Proyectil : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemigo")
         {
-            // hacer daño al enemigo
-            // usar el damage
             collision.gameObject.GetComponent<EnemigoIA>().takeDamage(damage);
         }
         Destroy(this.gameObject);

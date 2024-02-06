@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     {
         this.puntos += puntos;
         UIManager.Instance.actualizarTextoDinero();
+        ButtonManager.Instance.resetImagesColor();
     }
 
     public void quitarVida()

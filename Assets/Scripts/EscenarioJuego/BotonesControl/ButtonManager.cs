@@ -54,23 +54,22 @@ public class ButtonManager : MonoBehaviour
         {
             modoColocarObjeto = true;
 
-            cambiarColorImagen(imagenMuro, blanco);
-            cambiarColorImagen(imagenTorreta, blanco);
-            cambiarColorImagen(imagenCanion, blanco);
+            cambiarColorImagen(imagenMuro, blanco, true);
+            cambiarColorImagen(imagenTorreta, blanco, true);
+            cambiarColorImagen(imagenCanion, blanco, true);
 
             if (objetoAColocar == muro)
             {
                 objetoAColocarGlobal = muro;
-                cambiarColorImagen(imagenMuro, rojo);
+                cambiarColorImagen(imagenMuro, rojo, true);
             } else if (objetoAColocar == torreta)
             {
-                Debug.Log("T");
                 objetoAColocarGlobal = torreta;
-                cambiarColorImagen(imagenTorreta, rojo);
+                cambiarColorImagen(imagenTorreta, rojo, true);
             } else if (objetoAColocar == canion)
             {
                 objetoAColocarGlobal = canion;
-                cambiarColorImagen(imagenCanion, rojo);
+                cambiarColorImagen(imagenCanion, rojo, true);
             }
         }
         /*if(key == KeyCode.Alpha2)
@@ -82,9 +81,19 @@ public class ButtonManager : MonoBehaviour
         }*/
     }
 
-    void cambiarColorImagen(GameObject imagen, Color color)
+    void cambiarColorImagen(GameObject imagen, Color color, bool sobreescribirImgSelec)
     {
-        imagen.GetComponent<RawImage>().color = color;
+        if (sobreescribirImgSelec)
+        {
+            imagen.GetComponent<RawImage>().color = color;
+        }
+        else
+        {
+            if (imagen.GetComponent<RawImage>().color != rojo)
+            {
+                imagen.GetComponent<RawImage>().color = color;
+            }
+        }
     }
 
     void comprobarClickDerechoReset()
@@ -101,9 +110,9 @@ public class ButtonManager : MonoBehaviour
     {
         if (GameManager.Instance.getPartidaActiva()) // Si la partida no ha terminado todo sigue
         {
-            controlarOpcion(imagenMuro, muro, KeyCode.Alpha1, 5f);
-            controlarOpcion(imagenTorreta, torreta, KeyCode.Alpha2, 10f);
-            controlarOpcion(imagenCanion, canion, KeyCode.Alpha3, 20f);
+            controlarOpcion(imagenMuro, muro, KeyCode.Alpha1, muro.GetComponent<ParametrosObjetos>().precio);
+            controlarOpcion(imagenTorreta, torreta, KeyCode.Alpha2, torreta.GetComponent<ParametrosObjetos>().precio);
+            controlarOpcion(imagenCanion, canion, KeyCode.Alpha3, canion.GetComponent<ParametrosObjetos>().precio);
 
             comprobarClickDerechoReset();
 
@@ -113,18 +122,16 @@ public class ButtonManager : MonoBehaviour
             {
                 float tiempoCooldown = -1f;
 
-                if (objetoAColocarGlobal.GetComponent<DestruibleCooldown>() != null &&
-                    objetoAColocarGlobal.GetComponent<DestruibleCooldown>().cooldownDestruccion != -1f)
+                if (objetoAColocarGlobal.GetComponent<ParametrosObjetos>() != null &&
+                    objetoAColocarGlobal.GetComponent<ParametrosObjetos>().cooldownDestruccion != -1f)
                     /* Si (por si acaso aunque nunca debería de ser nulo
                      * en realidad) el objeto no tiene el script
                      * de DestruibleCooldown yel objeto no tiene cooldown de
                      * destrucción asociado (-1 seg)*/
                 {
-                    Debug.Log("PRE-ENTRO");
-                    tiempoCooldown = objetoAColocarGlobal.GetComponent<DestruibleCooldown>().cooldownDestruccion;
+                    tiempoCooldown = objetoAColocarGlobal.GetComponent<ParametrosObjetos>().cooldownDestruccion;
                     
                     Camara.colocarObjeto(objetoAColocarGlobal, true, tiempoCooldown);
-                    Debug.Log("ENTRO");
                 }
                 else
                 {
@@ -149,14 +156,25 @@ public class ButtonManager : MonoBehaviour
         }
         else
         {
-            cambiarColorImagen(imagen, gris);
+            cambiarColorImagen(imagen, gris, true);
         }
     }
 
-    void resetImagesColor()
+    public void resetImagesColor()
     {
-        cambiarColorImagen(imagenTorreta, blanco);
-        cambiarColorImagen(imagenMuro, blanco);
+        if (modoColocarObjeto)
+        {
+            
+            cambiarColorImagen(imagenTorreta, blanco, false);
+            cambiarColorImagen(imagenMuro, blanco, false);
+            cambiarColorImagen(imagenCanion, blanco, false);
+        }
+        else
+        {
+            cambiarColorImagen(imagenTorreta, blanco, true);
+            cambiarColorImagen(imagenMuro, blanco, true);
+            cambiarColorImagen(imagenCanion, blanco, true);
+        }
     }
 
     /*void actualizarPaths()
