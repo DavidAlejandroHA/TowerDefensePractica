@@ -53,6 +53,18 @@ public class TorretaLanzarProyectiles : MonoBehaviour
     {
         Transform enemigoMasCercano = null;
         float menorDistancia = Mathf.Infinity;
+        float menorDistanciaObstaculo = Mathf.Infinity;
+        bool enemigoVisible = true;
+
+
+        /*if (Physics.Raycast(transform.position, choque.transform.position, out hit, radio))
+        {
+            if (hit.collider.gameObject.tag == "Enemigo")
+            {
+                Debug.Log("a");
+
+            }
+        }*/
 
         // se comprueba y elige el enemigo con menor distancia
         if (listaChoques.Length > 0)
@@ -60,10 +72,32 @@ public class TorretaLanzarProyectiles : MonoBehaviour
             foreach (Collider choque in listaChoques)
             {
                 float distanciaActual = Vector3.Distance(transform.position, choque.transform.position);
-                if (distanciaActual < menorDistancia)
+                if (distanciaActual < menorDistancia /*&& choque.gameObject.tag == "Enemigo"*/)
                 {
+                    //
+                    RaycastHit[] hits = Physics
+                        .RaycastAll(transform.position, choque.transform.position, radio);
+                    foreach (RaycastHit hit in hits)
+                    {
+                        float distanciaActualObstaculo = Vector3.Distance(transform.position, hit.transform.position);
+                        if (distanciaActualObstaculo < menorDistanciaObstaculo && hit.collider.gameObject.tag == "Enemigo")
+                        {
+                            menorDistanciaObstaculo = distanciaActualObstaculo;
+                        }
+                            if ( )
+                        {
+                            menorDistanciaObstaculo
+
+                        }
+                    }
+                        
+                    {
+                        Debug.Log(hit.collider.gameObject);
+                        
+                    }
                     menorDistancia = distanciaActual;
                     enemigoMasCercano = choque.transform;
+
                 }
             }
         }
