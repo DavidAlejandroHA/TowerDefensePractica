@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BarradeVida : MonoBehaviour
+public class BarraMunicion : MonoBehaviour
 {
     public GameObject entidad;
-    float vidaMax;
+    float municionMax;
     /*[SerializeField] private */Slider slider;
 
-    public void actualizarBarraDeVida(float vidaActual, float vidaMax)
+    public void actualizarBarraDeMunicion(float municionActual, float municionMax)
     {
         slider = this.GetComponent<Slider>();
-        slider.value = vidaActual / vidaMax;
+        slider.value = municionActual / municionMax;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        vidaMax = entidad.GetComponent<EnemigoIA>().getVidaMax();
+        municionMax = entidad.GetComponent<TorretaLanzarProyectiles>().lanzamientos;
     }
 
     // Update is called once per frame

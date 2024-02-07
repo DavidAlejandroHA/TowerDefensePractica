@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class TorretaLanzarProyectiles : MonoBehaviour
 {
     public int lanzamientos;
+    int lanzamientosIniciales;
     public float cooldown;
     float temporizador;
     public float radio;
@@ -12,11 +14,17 @@ public class TorretaLanzarProyectiles : MonoBehaviour
     public GameObject anchorDisparador; 
     int mascara = 1 << 6;
 
+    //Barra de municion
+    [SerializeField] GameObject barraDeMunicionObj;
+    BarraMunicion barraDeMunicion;
+
     //Proyectiles
     public float velocidadLanzamiento;
     // Start is called before the first frame update
     void Start()
     {
+        lanzamientosIniciales = lanzamientos;
+        barraDeMunicion = barraDeMunicionObj.GetComponent<BarraMunicion>();
         temporizador = 0.1f;
     }
 
@@ -32,19 +40,19 @@ public class TorretaLanzarProyectiles : MonoBehaviour
         Transform enemigoMasCercano = obtenerPosEnemigoMasCercano(listaChoques);
         if (enemigoMasCercano != null)
         {
-            // temporizador para disparar cada x tiempo
+            // Temporizador para disparar cada x tiempo
             temporizador -= Time.deltaTime;
             if (temporizador <= 0)
             {
                 temporizador = cooldown;
             }
 
-            // se dispara un proyectil cada vez que se reinicia el temporizador
+            // Se dispara un proyectil cada vez que se reinicia el temporizador
             if (temporizador == cooldown)
             {
                 dispararProyectil(enemigoMasCercano);
             }
-            // la torreta va a estar siempre apuntando al enemigo para ser más realista
+            // La torreta va a estar siempre apuntando al enemigo para ser más realista
             transform.LookAt(enemigoMasCercano);
         }
     }
@@ -53,56 +61,48 @@ public class TorretaLanzarProyectiles : MonoBehaviour
     {
         Transform enemigoMasCercano = null;
         float menorDistancia = Mathf.Infinity;
-        float menorDistanciaObstaculo = Mathf.Infinity;
-        bool enemigoVisible = true;
 
-
-        /*if (Physics.Raycast(transform.position, choque.transform.position, out hit, radio))
-        {
-            if (hit.collider.gameObject.tag == "Enemigo")
-            {
-                Debug.Log("a");
-
-            }
-        }*/
-
-        // se comprueba y elige el enemigo con menor distancia
+        // Se comprueba y elige el enemigo con menor distancia
         if (listaChoques.Length > 0)
         {
             foreach (Collider choque in listaChoques)
             {
                 float distanciaActual = Vector3.Distance(transform.position, choque.transform.position);
-                if (distanciaActual < menorDistancia /*&& choque.gameObject.tag == "Enemigo"*/)
+                if (distanciaActual < menorDistancia)
                 {
-                    //
-                    RaycastHit[] hits = Physics
-                        .RaycastAll(transform.position, choque.transform.position, radio);
-                    foreach (RaycastHit hit in hits)
+                    /* Se detectan enemigos dentro del radio de acción pero hay que comprobar que
+                     * no hay muros por delante*/
+                    if (comprobarQueNoHayObstaculos(choque.transform))
                     {
-                        float distanciaActualObstaculo = Vector3.Distance(transform.position, hit.transform.position);
-                        if (distanciaActualObstaculo < menorDistanciaObstaculo && hit.collider.gameObject.tag == "Enemigo")
-                        {
-                            menorDistanciaObstaculo = distanciaActualObstaculo;
-                        }
-                            if ( )
-                        {
-                            menorDistanciaObstaculo
-
-                        }
+                        menorDistancia = distanciaActual;
+                        enemigoMasCercano = choque.transform;
                     }
-                        
-                    {
-                        Debug.Log(hit.collider.gameObject);
-                        
-                    }
-                    menorDistancia = distanciaActual;
-                    enemigoMasCercano = choque.transform;
-
                 }
             }
         }
-        return enemigoMasCercano; // puede llegar a ser nulo si no hay nada al rededor, hay que
-                                  // tenerlo en cuenta
+        return enemigoMasCercano; // puede llegar a ser nulo si no hay nada al rededor, hay que                    
+    }                               // tenerlo en cuenta
+
+    private bool comprobarQueNoHayObstaculos(Transform enemigoMasCercano)
+    {
+        bool enemigoVisible = true;
+        if (enemigoMasCercano != null)
+        {
+            /* Primero intenté esta parte con raycastall pero al final solo funciono con un linecast, 
+             * lo dejo como nota por si acaso*/
+
+            RaycastHit hit;
+            if (Physics.Linecast(transform.position, enemigoMasCercano.transform.position, out hit))
+            {
+                if (hit.transform.tag != "Proyectil" && hit.collider.gameObject.tag != "Enemigo" 
+                    /*&& hit.collider.gameObject.tag != "Artilleria"*/)
+                {
+                    enemigoVisible = false;
+                }
+            }
+        }
+
+        return enemigoVisible;
     }
 
     void dispararProyectil(Transform enemigo)
@@ -120,9 +120,11 @@ public class TorretaLanzarProyectiles : MonoBehaviour
             // se lanza dicho proyectil a la velocidad que le corresponde + la velocidad que tiene por defecto
             // la torreta
 
-            proyectil.GetComponent<Proyectil>().destruirProyectil();
+            proyectil.GetComponent<Proyectil>().destruirProyectil(); /* Destruye el proyectil una vez
+                                                                      que pase su tiempo de vida*/
             // destruye el proyectil en los segundos que tiene asignado
             lanzamientos--;
+            barraDeMunicion.actualizarBarraDeMunicion(lanzamientos, lanzamientosIniciales);
         } else
         {
             Destroy(this.transform.parent.gameObject); // elimina al padre de la torreta que es el que

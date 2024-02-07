@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemigo
   - Proyectil
+  - Artilleria
   layers:
   - Default
   - TransparentFX

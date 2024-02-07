@@ -18,16 +18,10 @@ public class VidasController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("a");
         if (other.gameObject.tag == "Enemigo")
         {
             GameManager.Instance.quitarVida();
-            Debug.Log("s");
             Destroy(other.gameObject);
         }
     }
-    /*void OnCollisionEnter(Collision collision)
-    {
-        
-    }*/
 }

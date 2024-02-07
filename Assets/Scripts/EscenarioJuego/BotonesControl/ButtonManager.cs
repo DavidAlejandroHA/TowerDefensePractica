@@ -21,7 +21,6 @@ public class ButtonManager : MonoBehaviour
     Color rojo = new Color32(255, 50, 50, 255);
     Color blanco = new Color32(255, 255, 255, 255);
     Color gris = new Color32(150, 150, 150, 255);
-    //GameObject imagenObjetoActual;
 
     public static ButtonManager Instance { get; private set; }
 
@@ -72,13 +71,6 @@ public class ButtonManager : MonoBehaviour
 
             checkEnoughMoney(precio);
         }
-        /*if(key == KeyCode.Alpha2)
-        {
-            modoColocarObjeto = true;
-            objetoAColocar = torreta;
-            cambiarColorImagen(imagenTorreta, rojo);
-            cambiarColorImagen(imagenMuro, blanco);
-        }*/
     }
 
     public void checkEnoughMoney(float precio)
