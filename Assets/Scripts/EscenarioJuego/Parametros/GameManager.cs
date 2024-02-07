@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
 
     public int vidas;
     public float dinero;
-    //public int dinero;
+    public float puntos;
     public float tiempoRestante;
-    int enemigosMuertos;
+    public int enemigosMuertos;
     
     bool partidaActiva = true;
 
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         if (tiempoRestante <= 0)
         {
             terminarPartida();
+            ganarPartida();
         }
         
     }
@@ -81,7 +82,13 @@ public class GameManager : MonoBehaviour
         if (vidas <= 0)
         {
             terminarPartida();
+            perderPartida();
         }
+    }
+
+    public void aniadirPuntos(float puntos)
+    {
+        this.puntos += puntos;
     }
 
     public bool getPartidaActiva()
@@ -93,5 +100,14 @@ public class GameManager : MonoBehaviour
     {
         partidaActiva = false;
         Time.timeScale = 0f;
+    }
+
+    void ganarPartida()
+    {
+        UIManager.Instance.mostrarPanelGanar();
+    }
+    void perderPartida()
+    {
+        UIManager.Instance.mostrarPanelPerder();
     }
 }

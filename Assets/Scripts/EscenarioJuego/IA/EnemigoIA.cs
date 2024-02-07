@@ -13,8 +13,8 @@ public class EnemigoIA : MonoBehaviour
     public float vida;
     float vidaMax;
 
-    // Puntos que devuelve al ser derrotado
-    public float puntos;
+    // Dinero que devuelve al ser derrotado
+    public float dineroADevolver;
 
     //Barra de vida
     [SerializeField] GameObject barraDeVidaObj;
@@ -48,7 +48,8 @@ public class EnemigoIA : MonoBehaviour
 
     void morir()
     {
-        GameManager.Instance.aniadirDinero(puntos);
+        GameManager.Instance.aniadirDinero(dineroADevolver);
+        GameManager.Instance.aniadirPuntos(dineroADevolver);
         GameManager.Instance.aniadirMuertes();
         Destroy(this.gameObject);
     }

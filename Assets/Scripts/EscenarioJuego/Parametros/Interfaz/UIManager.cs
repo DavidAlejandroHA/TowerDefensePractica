@@ -8,9 +8,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI objetoTextoVidas;
     [SerializeField] TextMeshProUGUI objetoTextoSegundos;
     [SerializeField] TextMeshProUGUI objetoTextoDinero;
+    [SerializeField] TextMeshProUGUI objetoTextoGanar;
     string textoVidasOriginal;
     string textoSegundosOriginal;
     string textoDineroOriginal;
+    string textoGanarOriginal;
+
+    public GameObject panelGanar;
+    public GameObject panelPerder;
     
     public static UIManager Instance { get; private set; }
 
@@ -31,6 +36,7 @@ public class UIManager : MonoBehaviour
         textoVidasOriginal = objetoTextoVidas.text;
         textoSegundosOriginal = objetoTextoSegundos.text;
         textoDineroOriginal = objetoTextoDinero.text;
+        textoGanarOriginal = objetoTextoGanar.text;
     }
 
     // Start is called before the first frame update
@@ -58,7 +64,23 @@ public class UIManager : MonoBehaviour
 
     public void actualizarTextoDinero()
     {
-        //Debug.Log(textoDineroOriginal);
         objetoTextoDinero.text = textoDineroOriginal + GameManager.Instance.dinero + "$";
+    }
+
+    public void actualizarTextoGanar()
+    {
+        objetoTextoGanar.text = textoGanarOriginal + 
+            (GameManager.Instance.enemigosMuertos * 2 + GameManager.Instance.dinero) + " puntos";
+    }
+
+    public void mostrarPanelGanar()
+    {
+        actualizarTextoGanar();
+        panelGanar.SetActive(true);
+    }
+
+    public void mostrarPanelPerder()
+    {
+        panelPerder.SetActive(true);
     }
 }
