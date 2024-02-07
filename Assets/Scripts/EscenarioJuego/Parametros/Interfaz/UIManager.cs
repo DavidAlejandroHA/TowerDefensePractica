@@ -59,6 +59,6 @@ public class UIManager : MonoBehaviour
     public void actualizarTextoDinero()
     {
         //Debug.Log(textoDineroOriginal);
-        objetoTextoDinero.text = textoDineroOriginal + GameManager.Instance.puntos + "$";
+        objetoTextoDinero.text = textoDineroOriginal + GameManager.Instance.dinero + "$";
     }
 }

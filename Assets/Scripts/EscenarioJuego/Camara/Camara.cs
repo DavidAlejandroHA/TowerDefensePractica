@@ -33,6 +33,7 @@ public class Camara : MonoBehaviour
             {
                 Destroy(objetoAColocarCopia, cooldownDestruccion);
             }
+            GameManager.Instance.quitarDinero(obj.GetComponent<ParametrosObjetos>().precio);
         }
     }
 

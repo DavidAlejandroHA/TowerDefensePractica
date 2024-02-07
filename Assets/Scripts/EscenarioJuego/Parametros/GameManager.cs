@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public int vidas;
-    public float puntos;
-    public int dinero;
+    public float dinero;
+    //public int dinero;
     public float tiempoRestante;
     int enemigosMuertos;
     
@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Se empieza con 20 puntos para hacer posible defenderse al jugador
-        aniadirPuntos(10f);
+        // Se empieza con 10 puntos para hacer posible defenderse al jugador
+        //aniadirDinero(10f);
     }
 
     // Update is called once per frame
@@ -57,9 +57,17 @@ public class GameManager : MonoBehaviour
     {
         enemigosMuertos++;
     }
-    public void aniadirPuntos(float puntos)
+    public void aniadirDinero(float dinero)
     {
-        this.puntos += puntos;
+        this.dinero += dinero;
+        UIManager.Instance.actualizarTextoDinero();
+        ButtonManager.Instance.resetImagesColor();
+    }
+
+    public void quitarDinero(float dinero)
+    {
+        this.dinero -= dinero;
+        ButtonManager.Instance.checkEnoughMoney(dinero);
         UIManager.Instance.actualizarTextoDinero();
         ButtonManager.Instance.resetImagesColor();
     }

@@ -48,12 +48,10 @@ public class ButtonManager : MonoBehaviour
     /*Cambia el color de las imágenes de los objetos según si se está usando para colocar un objeto y
      activa el modo de colocar objetos (mediante una asignación a un objeto compartido por toda la clase
     para posteriormente colocarlo (objetoAColocarGlobal) )*/
-    void comprobarYColocar(KeyCode key, GameObject objetoAColocar)
+    void comprobarYColocar(KeyCode key, GameObject objetoAColocar, float precio)
     {
         if (Input.GetKeyDown(key))
         {
-            modoColocarObjeto = true;
-
             cambiarColorImagen(imagenMuro, blanco, true);
             cambiarColorImagen(imagenTorreta, blanco, true);
             cambiarColorImagen(imagenCanion, blanco, true);
@@ -71,6 +69,8 @@ public class ButtonManager : MonoBehaviour
                 objetoAColocarGlobal = canion;
                 cambiarColorImagen(imagenCanion, rojo, true);
             }
+
+            checkEnoughMoney(precio);
         }
         /*if(key == KeyCode.Alpha2)
         {
@@ -79,6 +79,18 @@ public class ButtonManager : MonoBehaviour
             cambiarColorImagen(imagenTorreta, rojo);
             cambiarColorImagen(imagenMuro, blanco);
         }*/
+    }
+
+    public void checkEnoughMoney(float precio)
+    {
+        if (GameManager.Instance.dinero >= precio)
+        {
+            modoColocarObjeto = true;
+        }
+        else
+        {
+            modoColocarObjeto = false;
+        }
     }
 
     void cambiarColorImagen(GameObject imagen, Color color, bool sobreescribirImgSelec)
@@ -144,14 +156,14 @@ public class ButtonManager : MonoBehaviour
     }
 
     // Maneja si se pulsa una tecla para usar esa opción de compra
-    void controlarOpcion(GameObject imagen, GameObject objetoAColocar, KeyCode tecla, float puntos)
+    void controlarOpcion(GameObject imagen, GameObject objetoAColocar, KeyCode tecla, float precio)
     {
-        if (GameManager.Instance.puntos >= puntos) /* Si hay dinero disponible para realizar la compra de
+        if (GameManager.Instance.dinero >= precio) /* Si hay dinero disponible para realizar la compra de
                                                     dicha opción*/
         {
             if (Input.GetKeyDown(tecla))
             {
-                comprobarYColocar(tecla, objetoAColocar);
+                comprobarYColocar(tecla, objetoAColocar, precio);
             }
         }
         else
