@@ -21,11 +21,13 @@ public class CambiarEscena : MonoBehaviour
     public void cambiarEscena()
     {
         SceneManager.LoadScene(nombreEscena);
+        Debug.Log(Time.timeScale);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void salirJuego()
     {
-        Debug.Log("a");
+        //Debug.Log("a");
         Application.Quit();
     }
 }

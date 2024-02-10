@@ -180,7 +180,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Hecho por:\nDavid Alejandro Hern\xE1ndez Alonso\ny\nDiego\n"
+  m_text: 'Hecho por:
+
+    David Alejandro
+
+    y
+
+    Diego
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1d3bb68546dabc340a195faf1cc5ab4a, type: 2}
   m_sharedMaterial: {fileID: -2159761645903139816, guid: 1d3bb68546dabc340a195faf1cc5ab4a, type: 2}

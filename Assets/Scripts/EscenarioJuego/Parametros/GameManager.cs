@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     {
         // Se empieza con 10 puntos para hacer posible defenderse al jugador
         //aniadirDinero(10f);
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame
